@@ -1,6 +1,9 @@
 #completion
 autoload -U compinit; compinit
 
+#vi mode
+bindkey -v
+
 # Load version control information
 autoload -Uz vcs_info
 precmd() { vcs_info }
