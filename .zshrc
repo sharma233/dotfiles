@@ -1,8 +1,8 @@
+#force disable vim mode
+bindkey -e
+
 #completion
 autoload -U compinit; compinit
-
-#vi mode
-bindkey -v
 
 # Load version control information
 autoload -Uz vcs_info
@@ -17,3 +17,6 @@ zstyle ':vcs_info:git:*' actionformats 'on %b|%a%u%c'
 #prompt
 setopt PROMPT_SUBST
 PS1='%F{cyan}%~%f %F{red}${vcs_info_msg_0_}%f$ '
+
+#ruby
+source $HOMEBREW_PREFIX/opt/chruby/share/chruby/chruby.sh
