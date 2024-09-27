@@ -149,7 +149,7 @@ require('lazy').setup({
 		main = 'nvim-treesitter.configs', -- Sets main module to use for opts
 		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 		opts = {
-		  ensure_installed = { "apex", 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'javascript' },
+		  ensure_installed = { "apex", 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'javascript', 'rust', 'toml' },
 		  -- Autoinstall languages that are not installed
 		  auto_install = true,
 		  highlight = {
@@ -159,6 +159,12 @@ require('lazy').setup({
 			--  the list of additional_vim_regex_highlighting and disabled languages for indent.
 			additional_vim_regex_highlighting = false,
 		  },
+		  ident = { enable = true }, 
+		  rainbow = {
+			enable = true,
+			extended_mode = true,
+			max_file_lines = nil,
+		  }
 		},
 		-- There are additional nvim-treesitter modules that you can use to interact
 		-- with nvim-treesitter. You should go explore a few and see what interests you:
@@ -174,9 +180,11 @@ require('lazy').setup({
 	{'hrsh7th/nvim-cmp'},
 	{'williamboman/mason.nvim'},
 	{'williamboman/mason-lspconfig.nvim'},
+	{'simrat39/rust-tools.nvim'},
 	{'hrsh7th/cmp-nvim-lsp'},
 	{'hrsh7th/nvim-cmp'},
-	{'akinsho/git-conflict.nvim'}
+	{'akinsho/git-conflict.nvim'},
+	{'puremourning/vimspector'}
 })
 
 
@@ -217,6 +225,19 @@ require('mason-lspconfig').setup_handlers({
   default_handler
 })
 
+local rt = require("rust-tools")
+
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
+
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
 
@@ -249,3 +270,19 @@ cmp.setup({
     end,
   },
 })
+
+vim.cmd([[
+	let g:vimspector_sidebar_width = 85
+	let g:vimspector_bottombar_height = 15
+	let g:vimspector_terminal_maxwidth = 70
+]])
+
+-- Vimspector
+vim.cmd([[
+	nmap <F9> <cmd>call vimspector#Launch()<cr>
+	nmap <F5> <cmd>call vimspector#StepOver()<cr>
+	nmap <F8> <cmd>call vimspector#Reset()<cr>
+	nmap <F11> <cmd>call vimspector#StepOver()<cr>")
+	nmap <F12> <cmd>call vimspector#StepOut()<cr>")
+	nmap <F10> <cmd>call vimspector#StepInto()<cr>")
+]])

@@ -93,3 +93,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.opt.termguicolors = true
 vim.cmd.colorscheme('tokyonight')
+
+
+--vimspector
+vim.keymap.set('n', "Db", ":call vimspector#ToggleBreakpoint()<cr>")
+vim.keymap.set('n', "Dw", ":call vimspector#AddWatch()<cr>")
+vim.keymap.set('n', "De", ":call vimspector#Evaluate()<cr>")
