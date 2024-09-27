@@ -1,5 +1,17 @@
 require("config.lazy")
 
+vim.filetype = on
+vim.filetype.add({
+	extension = {
+		cls = 'apex',
+		apex = 'apex',
+		trigger = 'apex',
+		soql = 'soql',
+		sosl = 'sosl',
+		log = 'sflog',
+	}
+})
+
 -- Set space to leader key
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -45,8 +57,7 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 
 -- Configure how new splits should be opened
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+vim.opt.splitright = true vim.opt.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
@@ -79,3 +90,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+vim.opt.termguicolors = true
+vim.cmd.colorscheme('tokyonight')
