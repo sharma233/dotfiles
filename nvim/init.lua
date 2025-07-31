@@ -96,6 +96,13 @@ vim.cmd.colorscheme('tokyonight')
 
 
 --vimspector
-vim.keymap.set('n', "Db", ":call vimspector#ToggleBreakpoint()<cr>")
-vim.keymap.set('n', "Dw", ":call vimspector#AddWatch()<cr>")
-vim.keymap.set('n', "De", ":call vimspector#Evaluate()<cr>")
+--vim.keymap.set('n', "Db", ":call vimspector#ToggleBreakpoint()<cr>")
+--vim.keymap.set('n', "Dw", ":call vimspector#AddWatch()<cr>")
+--vim.keymap.set('n', "De", ":call vimspector#Evaluate()<cr>")
+
+--show diagnostic in floating window
+vim.keymap.set('n', "<leader>do", ":lua vim.diagnostic.open_float()<cr>")
+vim.diagnostic.enable = true
+vim.diagnostic.config({
+	virtual_lines = true,
+})

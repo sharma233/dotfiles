@@ -21,3 +21,7 @@ PS1='%F{cyan}%~%f %F{red}${vcs_info_msg_0_}%f$ '
 #ruby
 source $HOMEBREW_PREFIX/opt/chruby/share/chruby/chruby.sh
 source /opt/homebrew/Cellar/z/1.12/etc/profile.d/z.sh
+export PATH=/Users/surya/.local/bin:$PATH
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
